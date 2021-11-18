@@ -80,6 +80,10 @@
                 <source>locations</source>
                 <target>Locations</target>
             </trans-unit>
+            <trans-unit id="structures">
+                <source>structures</source>
+                <target>Structures</target>
+            </trans-unit>
             <trans-unit id="cities">
                 <source>cities</source>
                 <target>Cities</target>
