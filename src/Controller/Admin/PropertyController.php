@@ -24,6 +24,7 @@ final class PropertyController extends BaseController
     {
         $searchParams = $transformer->transform($request);
         $properties = $repository->findByFilter($searchParams);
+        //dd($properties);
 
         return $this->render('admin/property/index.html.twig', [
             'site' => $this->site(),

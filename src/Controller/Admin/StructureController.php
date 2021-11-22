@@ -25,7 +25,7 @@ final class StructureController extends BaseController
         $repository = $this->getDoctrine()->getRepository(Structures::class);
 
         $structures = $repository->findAll();
-
+       //dd($structures);
         return $this->render('admin/structure/index.html.twig', [
             'site' => $this->site(),
             'structure' => $structures,
@@ -62,7 +62,7 @@ final class StructureController extends BaseController
         
         return $this->render('admin/structure/new.html.twig', [
             'site' => $this->site(),
-            'deal_type' => $structure,
+            'structure' => $structure,
             'form' => $form->createView(),
         ]);
     }
@@ -92,7 +92,7 @@ final class StructureController extends BaseController
     }
 
     /**
-     * Deletes a DealType entity.
+     * Deletes a Structure entity.
      *
      * @Route("/structure{id<\d+>}/delete", methods={"POST"}, name="admin_structure_delete")
      * @IsGranted("ROLE_ADMIN")

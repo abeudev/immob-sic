@@ -64,11 +64,18 @@ class Structures
      */
     private $dateSuppression;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Agences::class, mappedBy="structure_id")
+     */
+    private $agences;
+
+  
 
     public function __construct()
     {
         $this->dateCreation= new \DateTimeImmutable();
         $this->dateModification= new \DateTimeImmutable();
+        $this->agences = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -158,5 +165,50 @@ class Structures
 
         return $this;
     }
+
+    public function getDateSuppression(): ?\DateTimeInterface
+    {
+        return $this->dateSuppression;
+    }
+
+    public function setDateSuppression(?\DateTimeInterface $dateSuppression): self
+    {
+        $this->dateSuppression = $dateSuppression;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agences[]
+     */
+    public function getAgences(): Collection
+    {
+        return $this->agences;
+    }
+
+    public function addAgence(Agences $agence): self
+    {
+        if (!$this->agences->contains($agence)) {
+            $this->agences[] = $agence;
+            $agence->setStructureId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgence(Agences $agence): self
+    {
+        if ($this->agences->removeElement($agence)) {
+            // set the owning side to null (unless already changed)
+            if ($agence->getStructureId() === $this) {
+                $agence->setStructureId(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+  
 
 }

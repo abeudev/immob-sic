@@ -24,7 +24,7 @@ final class CityController extends BaseController
     public function index(CityRepository $repository): Response
     {
         $cities = $repository->findAll();
-
+//dd($cities);
         return $this->render('admin/city/index.html.twig', [
             'site' => $this->site(),
             'cities' => $cities,
