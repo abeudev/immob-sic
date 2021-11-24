@@ -31,6 +31,7 @@
 					<thead class="thead">
 						<tr>
 							<th>{{ 'Nom de la structure' | trans }}</th>
+							<th>{{ 'Immatriculation au registre du commerce et des sociétés' | trans }}</th>
 							<th>{{ 'adresse' | trans }}</th>
 							<th>{{ 'contact' | trans }}</th>
 							<th>{{ 'email' | trans }}</th>
@@ -43,6 +44,7 @@
 						{% for structure in structure %}
 							<tr>
 								<td>{{ structure.libelle }}</td>
+								<td>{{ structure.NumeroRegisteDeCommerce }}</td>
 								<td>{{ structure.adresse }}</td>
 								<td>{{ structure.contact }}</td>
 								<td>{{ structure.email }}</td>

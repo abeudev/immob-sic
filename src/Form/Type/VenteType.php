@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Form\Type;
 
-use App\Entity\Structures;
+use App\Entity\Vente;
+use App\Entity\Property;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-final class StructureType extends AbstractType
+final class VenteType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,42 +20,43 @@ final class StructureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('NumeroRegisteDeCommerce', null, [
+            ->add('bien', EntityType::class, [
+                'class' => Property::class,
                 'attr' => [
                     'autofocus' => true,
                     'class' => 'form-control',
                 ],
-                'label' => 'Immatriculation au registre du commerce et des sociétés',
+                'choice_label' => 'slug',
+                'placeholder' => 'Selectionner un bien',
+                'label' => 'Bien',
             ])
-            ->add('libelle', null, [
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'attr' => [
+                    'autofocus' => true,
+                    'class' => 'form-control',
+                ],
+                'choice_label' => 'username',
+                'placeholder' => 'Selectionner un utilisateur',
+                'label' => 'Utilisateur',
+            ])
+            ->add('PrixVente', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Nom de la structure',
+                'label' => 'Prix de vente',
             ])
-            ->add('adresse', null, [
+            ->add('Dossier', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'adresse',
+                'label' => 'Dossier déposé',
             ])
-            ->add('contact', null, [
+            ->add('dateVente', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'contact',
-            ])
-            ->add('email', null, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'email',
-            ])
-            ->add('siteWeb', null, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'site web',
+                'label' => 'Date de vente',
             ]);
     }
 }

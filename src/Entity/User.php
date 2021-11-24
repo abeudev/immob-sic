@@ -77,9 +77,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $profile;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Contrat::class, mappedBy="user")
+     */
+    private $contrats;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="user")
+     */
+    private $ventes;
+
+   
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->contrats = new ArrayCollection();
+        $this->ventes = new ArrayCollection();
     }
 
     public function getUsername(): ?string
@@ -255,4 +269,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Contrat[]
+     */
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrat(Contrat $contrat): self
+    {
+        if (!$this->contrats->contains($contrat)) {
+            $this->contrats[] = $contrat;
+            $contrat->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrat(Contrat $contrat): self
+    {
+        if ($this->contrats->removeElement($contrat)) {
+            // set the owning side to null (unless already changed)
+            if ($contrat->getUser() === $this) {
+                $contrat->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vente[]
+     */
+    public function getVentes(): Collection
+    {
+        return $this->ventes;
+    }
+
+    public function addVente(Vente $vente): self
+    {
+        if (!$this->ventes->contains($vente)) {
+            $this->ventes[] = $vente;
+            $vente->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVente(Vente $vente): self
+    {
+        if ($this->ventes->removeElement($vente)) {
+            // set the owning side to null (unless already changed)
+            if ($vente->getUser() === $this) {
+                $vente->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

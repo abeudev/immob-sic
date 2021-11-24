@@ -45,7 +45,7 @@ class Structures
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
     private $siteWeb;
 
@@ -68,6 +68,11 @@ class Structures
      * @ORM\OneToMany(targetEntity=Agences::class, mappedBy="structure_id")
      */
     private $agences;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $NumeroRegisteDeCommerce;
 
   
 
@@ -208,7 +213,16 @@ class Structures
         return $this;
     }
 
-   
-  
+    public function getNumeroRegisteDeCommerce(): ?string
+    {
+        return $this->NumeroRegisteDeCommerce;
+    }
+
+    public function setNumeroRegisteDeCommerce(string $NumeroRegisteDeCommerce): self
+    {
+        $this->NumeroRegisteDeCommerce = $NumeroRegisteDeCommerce;
+
+        return $this;
+    }
 
 }
