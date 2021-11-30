@@ -55,30 +55,48 @@
 			<span>{{ 'menu.settings'|trans }}</span>
 		</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('admin_structures') }}">
 
-			<i class="fas fa-city"></i>
-			<span>{{ 'structures'|trans }}</span>
-		</a>
-	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{{ path('admin_agences') }}">
-			<i class="fa fa-warehouse"></i>
-			<span>{{ 'agences'|trans }}</span>
+		<a class="nav-link" href="{{ path('admin_rdv') }}">
+			<i class="fas fa-paper"></i>
+			<span>{{ 'Rendez-vous'|trans }}</span>
 		</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('admin_contrat') }}">
-			<i class="fa fa-file-contract"></i>
-			<span>{{ 'Location'|trans }}</span>
+
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="citiesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-gopuram"></i>
+			<span>{{ 'Label'|trans }}</span>
 		</a>
+		<div class="dropdown-menu" aria-labelledby="citiesDropdown">
+			<a class="dropdown-item" href="{{ path('admin_structures') }}">
+				<i class="fas fa-city"></i>
+				<span>{{ 'Structure'|trans }}</span>
+			</a>
+			<a class="dropdown-item" href="{{ path('admin_agences') }}">
+				<i class="fa fa-warehouse"></i>
+				<span>{{ 'Agence'|trans }}</span>
+			</a>
+		</div>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('admin_vente') }}">
-			<i class="fa fa-exchange-alt"></i>
-			<span>{{ 'Vente'|trans }}</span>
+
+
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="citiesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-cash-register"></i>
+			<span>{{ 'Vente/location'|trans }}</span>
 		</a>
+		<div class="dropdown-menu" aria-labelledby="citiesDropdown">
+			<a class="dropdown-item" href="{{ path('admin_contrat') }}">
+				<i class="fa fa-file-contract"></i>
+				<span>{{ 'Location'|trans }}</span>
+			</a>
+			<a class="dropdown-item" href="{{ path('admin_vente') }}">
+				<i class="fa fa-exchange-alt"></i>
+				<span>{{ 'Vente'|trans }}</span>
+			</a>
+		</div>
 	</li>
+
 
 </ul>

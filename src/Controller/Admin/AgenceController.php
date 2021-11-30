@@ -25,7 +25,6 @@ final class AgenceController extends BaseController
         $repository = $this->getDoctrine()->getRepository(Agences::class);
 
         $agences = $repository->findAll();
-        //dd($agences);
 
         return $this->render('admin/agence/index.html.twig', [
             'site' => $this->site(),
@@ -45,19 +44,14 @@ final class AgenceController extends BaseController
             ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
-         //dd($agences);
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($agences);
 
-            //dd($agences);
-            
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndCreateNew');
             if ($button->isClicked()) {
-               // dd($agences);
                 return $this->redirectToRoute('admin_agences_new');
             }
-                ///dd($agences);
             return $this->redirectToRoute('admin_agences');
         }
         
@@ -81,11 +75,9 @@ final class AgenceController extends BaseController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $service->update($agences);
-
             return $this->redirectToRoute('admin_agences');
         }
     
-
         return $this->render('admin/agence/edit.html.twig', [
             'site' => $this->site(),
             'form' => $form->createView(),
@@ -103,9 +95,7 @@ final class AgenceController extends BaseController
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_agences');
         }
-
         $service->remove($agences);
-
         return $this->redirectToRoute('admin_agences');
     }
 

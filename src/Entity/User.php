@@ -87,6 +87,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $ventes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="utilisateur")
+     */
+    private $rdvs;
+
    
 
     public function __construct()
@@ -94,6 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->properties = new ArrayCollection();
         $this->contrats = new ArrayCollection();
         $this->ventes = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getUsername(): ?string
@@ -324,6 +330,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($vente->getUser() === $this) {
                 $vente->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->removeElement($rdv)) {
+            // set the owning side to null (unless already changed)
+            if ($rdv->getUtilisateur() === $this) {
+                $rdv->setUtilisateur(null);
             }
         }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Type;
 
-use App\Entity\Vente;
+use App\Entity\Rdv;
 use App\Entity\Property;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-final class VenteType extends AbstractType
+final class RdvType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -30,33 +30,26 @@ final class VenteType extends AbstractType
                 'placeholder' => 'Selectionner un bien',
                 'label' => 'Bien',
             ])
-            ->add('user', EntityType::class, [
+            ->add('utilisateur', EntityType::class, [
                 'class' => User::class,
                 'attr' => [
-                    'autofocus' => true,
                     'class' => 'form-control',
                 ],
                 'choice_label' => 'username',
-                'placeholder' => 's un utilisateur',
+                'placeholder' => 'Selectionner un utilisateur',
                 'label' => 'Utilisateur',
             ])
-            ->add('PrixVente', null, [
+            ->add('date', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Prix de vente',
+                'label' => 'Date du rendez-vous',
             ])
-            ->add('Dossier', null, [
+            ->add('heure', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Dossier déposé',
-            ])
-            ->add('dateVente', null, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Date de vente',
+                'label' => 'L\'heure du rendez-vous',
             ]);
     }
 }

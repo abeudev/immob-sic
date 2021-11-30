@@ -114,6 +114,11 @@ class Property
      */
     private $ventes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="bien")
+     */
+    private $rdvs;
+
 
 
     public function __construct()
@@ -122,6 +127,7 @@ class Property
         $this->features = new ArrayCollection();
         $this->contrats = new ArrayCollection();
         $this->ventes = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getAuthor(): ?User
@@ -407,6 +413,36 @@ class Property
             // set the owning side to null (unless already changed)
             if ($vente->getBien() === $this) {
                 $vente->setBien(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setBien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->removeElement($rdv)) {
+            // set the owning side to null (unless already changed)
+            if ($rdv->getBien() === $this) {
+                $rdv->setBien(null);
             }
         }
 
