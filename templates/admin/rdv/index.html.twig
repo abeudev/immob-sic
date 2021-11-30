@@ -33,6 +33,7 @@
 						<th>{{ 'Nom de l\'utilisateur' | trans }}</th>
 							<th>{{ 'Date du rendez-vous' | trans }}</th>
 							<th>{{ 'Heure du rendez-vous' | trans }}</th>
+							<th>{{ 'Etat du rendez-vous' | trans }}</th>
 						</tr>
 				 	</thead>
 					<tbody>
@@ -42,7 +43,13 @@
 								<td>{{rdv.bien.slug |raw }}</td>
 								<td>{{ rdv.utilisateur.username }}</td>
 								<td>{{ rdv.date | date("m/d/Y")}}</td>
-								<td>{{ rdv.heure | date("H:m:s")}}</td>
+								<td>{{ rdv.heure | date("H:m")}}</td>
+									{% if  rdv.isEffect == 1 %}
+										<td><img  src="{{ asset('/images/yes.png') }}" ></td>
+									{% endif %}
+									{% if  rdv.isEffect == 0 %}
+										<td><img src="{{ asset('/images/no.png') }}">	</td>
+									{% endif %}
 								<td>
 									{{ include('admin/rdv/_action_form.html.twig', {rdv: rdv}, with_context = false) }}
 								</td>
@@ -60,4 +67,4 @@
 		</div>
 	</div>
 
-{% endblock %} 
+{% endblock %}

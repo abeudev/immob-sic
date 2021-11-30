@@ -39,6 +39,11 @@ class Rdv
      */
     private $heure;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isEffect;
+
 
     public function __construct()
     {
@@ -95,6 +100,18 @@ class Rdv
     public function setHeure(\DateTimeInterface $heure): self
     {
         $this->heure = $heure;
+
+        return $this;
+    }
+
+    public function getIsEffect(): ?bool
+    {
+        return $this->isEffect;
+    }
+
+    public function setIsEffect(bool $isEffect): self
+    {
+        $this->isEffect = $isEffect;
 
         return $this;
     }

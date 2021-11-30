@@ -45,6 +45,12 @@ final class RdvType extends AbstractType
                 ],
                 'label' => 'Date du rendez-vous',
             ])
+            ->add('isEffect', null, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Effectué',
+            ])
             ->add('heure', null, [
                 'attr' => [
                     'class' => 'form-control',
