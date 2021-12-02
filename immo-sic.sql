@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 25 nov. 2021 à 21:02
+-- Généré le : jeu. 02 déc. 2021 à 15:05
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.4.9
 
@@ -248,7 +248,10 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20211123091643', '2021-11-23 09:16:54', 104),
 ('DoctrineMigrations\\Version20211123092713', '2021-11-23 09:27:28', 157),
 ('DoctrineMigrations\\Version20211124103114', '2021-11-24 10:31:27', 230),
-('DoctrineMigrations\\Version20211124120659', '2021-11-24 12:07:10', 129);
+('DoctrineMigrations\\Version20211124120659', '2021-11-24 12:07:10', 129),
+('DoctrineMigrations\\Version20211130122751', '2021-11-30 12:28:02', 407),
+('DoctrineMigrations\\Version20211130153553', '2021-11-30 15:36:05', 86),
+('DoctrineMigrations\\Version20211202150331', '2021-12-02 15:03:46', 334);
 
 -- --------------------------------------------------------
 
@@ -433,6 +436,21 @@ INSERT INTO `photo` (`id`, `property_id`, `photo`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `prisede_rdv`
+--
+
+DROP TABLE IF EXISTS `prisede_rdv`;
+CREATE TABLE IF NOT EXISTS `prisede_rdv` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_rdv` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `profile`
 --
 
@@ -598,6 +616,32 @@ INSERT INTO `property_feature` (`property_id`, `feature_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `rdv`
+--
+
+DROP TABLE IF EXISTS `rdv`;
+CREATE TABLE IF NOT EXISTS `rdv` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `bien_id` int NOT NULL,
+  `utilisateur_id` int NOT NULL,
+  `date` date NOT NULL,
+  `heure` time NOT NULL,
+  `is_effect` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_10C31F86BD95B80F` (`bien_id`),
+  KEY `IDX_10C31F86FB88E14F` (`utilisateur_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `rdv`
+--
+
+INSERT INTO `rdv` (`id`, `bien_id`, `utilisateur_id`, `date`, `heure`, `is_effect`) VALUES
+(4, 3, 1, '2021-11-30', '16:17:00', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `settings`
 --
 
@@ -713,7 +757,8 @@ CREATE TABLE IF NOT EXISTS `vente` (
   `date_vente` date NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_888A2A4CBD95B80F` (`bien_id`)
+  KEY `IDX_888A2A4CBD95B80F` (`bien_id`),
+  KEY `IDX_888A2A4CA76ED395` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -796,9 +841,17 @@ ALTER TABLE `property_feature`
   ADD CONSTRAINT `IDX_461A3F1E60E4B879` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`id`) ON DELETE CASCADE;
 
 --
+-- Contraintes pour la table `rdv`
+--
+ALTER TABLE `rdv`
+  ADD CONSTRAINT `FK_10C31F86BD95B80F` FOREIGN KEY (`bien_id`) REFERENCES `property` (`id`),
+  ADD CONSTRAINT `FK_10C31F86FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `users` (`id`);
+
+--
 -- Contraintes pour la table `vente`
 --
 ALTER TABLE `vente`
+  ADD CONSTRAINT `FK_888A2A4CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `FK_888A2A4CBD95B80F` FOREIGN KEY (`bien_id`) REFERENCES `property` (`id`);
 COMMIT;
 
