@@ -22,7 +22,11 @@ final class PropertyController extends BaseController
      */
     public function search(Request $request, FilterRepository $repository, RequestToArrayTransformer $transformer): Response
     {
+
+       // dd($request);
         $searchParams = $transformer->transform($request);
+//dd($searchParams);
+        
         $properties = $repository->findByFilter($searchParams);
 
         return $this->render('property/index.html.twig',

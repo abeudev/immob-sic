@@ -1,3 +1,114 @@
+<style type="text/css">
+
+
+	.center {
+		position: absolute;
+		top: 50.9%;
+		left: 25%;
+		transform: translate(-50%, -50%);
+	}
+
+	.center button {
+		padding: 10px 20px;
+		font-size: 15px;
+		font-weight: 600;
+		color: #222;
+		background: #f5f5f5;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+
+	.popup {
+		position: absolute;
+		top: -150%;
+		left: 50%;
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(1.25);
+		width: 380px;
+		padding: 20px 30px;
+		background: #fff;
+		box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+		border-radius: 10px;
+		transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0, transform 20ms ease-in-out 0;
+	}
+
+	.popup.active {
+		top: 50%;
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+		transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0, transform 20ms ease-in-out 0;
+	}
+
+	.popup .close-btn {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 15px;
+		height: 15px;
+		background: #888;
+		color: #eee;
+		text-align: center;
+		line-height: 15px;
+		border-radius: 15px;
+		cursor: pointer;
+	}
+
+	.popup .form h2 {
+		text-align: center;
+		color: #222;
+		margin: 10px 0 20px;
+		font-size: 25px;
+	}
+
+	.popup .form .form-element {
+		margin: 15px 0;
+	}
+
+	.popup .form .form-element label {
+		font-size: 14px;
+		color: #222;
+	}
+
+	.popup .form .form-element input[type="text"],
+	.popup .form .form-element input[type="date"],
+	.popup .form .form-element input[type="password"] {
+		margin-top: 5px;
+		display: block;
+		width: 100%;
+		padding: 10px;
+		outline: none;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+	}
+
+	.popup .form .form-element input[type="checkbox"] {
+		margin-right: 5px;
+	}
+
+	.popup .form .form-element button {
+		width: 100%;
+		height: 40px;
+		border: none;
+		outline: none;
+		font-size: 16px;
+		background: #222;
+		color: #f5f5f5;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	.popup .form .form-element a {
+		display: block;
+		text-align: right;
+		font-size: 15px;
+		color: #1a79ca;
+		text-decoration: none;
+		font-weight: 600;
+	}
+</style>
+
 <div class="overview">
 	<table>
 		<tbody>
@@ -83,31 +194,46 @@
 
 			{% endif %}
 
-			{% if  property.dealType.name == 'Sale' %}
-
-				<th>{{ 'Action :'}}</th>
-				<td>
-					<button class="btn btn-primary">
-						<i class=""></i>
-						Acheter
-					</button>
-
-				</td>
-			{% endif %}
-
-			{% if  property.dealType.name == 'Rent' %}
-
-				<th>{{ 'Action :'}}</th>
-				<td>
-					<button class="btn btn-primary">
-						<i class=""></i>
-						Louer
-					</button>
-
-				</td>
-			{% endif %}
-
-
+			<th>{{ 'Action :'}}</th>
+			<td>
+				<div class="center">
+					<button id="show-login" class="btn btn-primary">Je suis intéressé</button>
+				</div>
+				<div class="popup">
+					<div class="close-btn">&times;</div>
+					<div class="form">
+						<h2>Remplir les informations suivantes pour prendre Rendez-vous pour le bien :</h2>
+						<div class="form-element">
+							<u>
+								<h2>{{property.slug}}</h2>
+							</u>
+						</div>
+						<div class="form-element">
+							<label for="fullname">Nom et Prénom</label>
+							<input type="text" id="fullname" placeholder="ex: Jean Jacques">
+						</div>
+						<div class="form-element">
+							<label for="contact">Numéro de téléphone</label>
+							<input type="text" id="password" placeholder="ex: 0707070707">
+						</div>
+						<div class="form-element">
+							<label for="date">Date</label>
+							<br/>
+							<input type="date"/>
+						</div>
+						<div class="form-element">
+							<button>Soumettre</button>
+						</div>
+					</div>
+				</div>
+			</td>
 		</tbody>
 	</tbody>
-</table></div>
+</table></div><script type="text/javascript">
+document.querySelector("#show-login").addEventListener('click', function () {
+document.querySelector(".popup").classList.add("active");
+});
+
+document.querySelector(".popup .close-btn").addEventListener("click", function () {
+document.querySelector(".popup").classList.remove("active");
+});</script>
