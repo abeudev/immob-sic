@@ -26,7 +26,7 @@ final class PropertyController extends BaseController
        // dd($request);
         $searchParams = $transformer->transform($request);
 //dd($searchParams);
-        
+
         $properties = $repository->findByFilter($searchParams);
 
         return $this->render('property/index.html.twig',
@@ -36,6 +36,34 @@ final class PropertyController extends BaseController
                 'searchParams' => $searchParams,
             ]
         );
+    }
+
+    /**
+     * @Route("/interesse",  methods={"POST"}, name="property_interesse")
+     */
+    public function interesse(Request $request): Response
+    {
+
+        $params = $_POST;
+
+       /* $params['fullname']=$request->query->$_POST
+        $params['contact']=$request->query->post('contact');
+        $params['date']=$request->query->get('date');*/
+
+        //$data_interesse = $transformer->transform($request);
+       dd($params);
+        /*$searchParams = $transformer->transform($request);
+//dd($searchParams);
+
+        $properties = $repository->findByFilter($searchParams);
+
+        return $this->render('property/index.html.twig',
+            [
+                'site' => $this->site(),
+                'properties' => $properties,
+                'searchParams' => $searchParams,
+            ]
+        );*/
     }
 
     /**

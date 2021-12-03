@@ -199,6 +199,7 @@
 				<div class="center">
 					<button id="show-login" class="btn btn-primary">Je suis intéressé</button>
 				</div>
+                <form class="form-horizontal" method="post" action="{{ path('property_interesse') }}">
 				<div class="popup">
 					<div class="close-btn">&times;</div>
 					<div class="form">
@@ -210,22 +211,23 @@
 						</div>
 						<div class="form-element">
 							<label for="fullname">Nom et Prénom</label>
-							<input type="text" id="fullname" placeholder="ex: Jean Jacques">
+							<input type="text" id="fullname" name="fullname" placeholder="ex: Jean Jacques">
 						</div>
 						<div class="form-element">
 							<label for="contact">Numéro de téléphone</label>
-							<input type="text" id="password" placeholder="ex: 0707070707">
+							<input type="text" id="contact" name="contact" placeholder="ex: 0707070707">
 						</div>
 						<div class="form-element">
 							<label for="date">Date</label>
 							<br/>
-							<input type="date"/>
+							<input type="date" id="date" name="date" placeholder=""/>
 						</div>
 						<div class="form-element">
 							<button>Soumettre</button>
 						</div>
 					</div>
 				</div>
+                </form>
 			</td>
 		</tbody>
 	</tbody>
