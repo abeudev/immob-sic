@@ -196,45 +196,11 @@
 
 			<th>{{ 'Action :'}}</th>
 			<td>
-				<div class="center">
-					<button id="show-login" class="btn btn-primary">Je suis intéressé</button>
-				</div>
-				<div class="popup">
-					<div class="close-btn">&times;</div>
-					<div class="form">
-						<h2>Remplir les informations suivantes pour prendre Rendez-vous pour le bien :</h2>
-						<div class="form-element">
-							<u>
-								<h2>{{property.slug}}</h2>
-							</u>
-						</div>
-						<div class="form-element">
-							<label for="fullname">Nom et Prénom</label>
-							<input type="text" id="fullname" placeholder="ex: Jean Jacques">
-						</div>
-						<div class="form-element">
-							<label for="contact">Numéro de téléphone</label>
-							<input type="text" id="password" placeholder="ex: 0707070707">
-						</div>
-						<div class="form-element">
-							<label for="date" placeholder="20/06/1999">Date</label>
-
-							<br/>
-							<input type="date"/>
-						</div>
-						<div class="form-element">
-							<button>Soumettre</button>
-						</div>
-					</div>
-				</div>
+				<a href="{{ url('interesse_new') }}" class="btn btn-primary">
+					Je suis intéressé
+				</a>
 			</td>
+
 		</tbody>
 	</tbody>
-</table></div><script type="text/javascript">
-document.querySelector("#show-login").addEventListener('click', function () {
-document.querySelector(".popup").classList.add("active");
-});
-
-document.querySelector(".popup .close-btn").addEventListener("click", function () {
-document.querySelector(".popup").classList.remove("active");
-});</script>
+</table></div>

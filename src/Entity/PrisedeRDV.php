@@ -23,12 +23,12 @@ class PrisedeRDV
     private $fullname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime", unique=true)
      */
     private $dateRdv;
 

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\PrisedeRdv;
+use App\Form\Type\PriseRdvType;
+use App\Service\Admin\PropertyService;
 use App\Repository\FilterRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\SimilarRepository;
