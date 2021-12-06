@@ -34,7 +34,7 @@ final class AgenceService extends AbstractService
         $this->addFlash('success', 'message.created');
     }
 
-     public function update(Agences $agences): void
+    public function update(Agences $agences): void
     {
         $this->save($agences);
         $this->addFlash('success', 'message.updated');
