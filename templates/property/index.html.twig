@@ -9,11 +9,17 @@
 {% endblock %}
 
 {% block header %}
-	{{ include('property/partials/_search_form.html.twig') }}
+{{ include('layout/partials/header_home.html.twig') }}
+
+	{# {{ include('property/partials/_search_form.html.twig') }} #}
 {% endblock %}
 
-{% block body %}
 
+{% block body %}
+{{ include('layout/partials/slide_section.html.twig') }}
+{{ include('layout/partials/find_your_home.html.twig') }}
+{{ include('layout/partials/more_views.html.twig') }}
+{{ include('layout/partials/recent_properties.html.twig') }}
 	{% if is_granted('ROLE_ADMIN') %}
 
 		<a href="{{ url('admin_property_new') }}" class="btn btn-primary float">
@@ -28,7 +34,7 @@
 
 	{% endif %}
 
-	<div class="row">
+	{# <div class="row">
 		<div class="col-lg-6 col-sm-12">
 			<h1 class="h3">{{ site.title }}</h1>
 		</div>
@@ -38,7 +44,7 @@
 				{{ 'show_on_map'|trans }}
 			</a>
 		</div>
-	</div>
+	</div> #}
 
 	<br>
 	<div class="row">
@@ -95,7 +101,7 @@
 							</p>
 						{% endif %}
 
-						
+
 
 						<span class="attribute">{{ property.dealType.name }}</span>
 						<span class="attribute">{{ property.category.name }}</span>
