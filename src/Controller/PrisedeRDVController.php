@@ -23,7 +23,7 @@ final class PrisedeRDVController extends BaseController
     {
         
         $priserdv = new PrisedeRDV();
-          dd($_POST);
+        //dd($_POST);
         $form = $this->createForm(PriseRdvType::class, $priserdv);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

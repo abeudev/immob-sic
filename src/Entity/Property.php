@@ -33,7 +33,7 @@ class Property
     private $deal_type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="properties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="properties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -119,6 +119,46 @@ class Property
      */
     private $rdvs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $elementary_school;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $area;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $year_built;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $garage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $school_district;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $high_school;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $middlle_school;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $img;
+
 
 
     public function __construct()
@@ -154,12 +194,12 @@ class Property
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?Categories
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategory(?Categories $category): self
     {
         $this->category = $category;
 
@@ -445,6 +485,102 @@ class Property
                 $rdv->setBien(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getElementarySchool(): ?string
+    {
+        return $this->elementary_school;
+    }
+
+    public function setElementarySchool(string $elementary_school): self
+    {
+        $this->elementary_school = $elementary_school;
+
+        return $this;
+    }
+
+    public function getArea(): ?int
+    {
+        return $this->area;
+    }
+
+    public function setArea(int $area): self
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    public function getYearBuilt(): ?\DateTimeInterface
+    {
+        return $this->year_built;
+    }
+
+    public function setYearBuilt(\DateTimeInterface $year_built): self
+    {
+        $this->year_built = $year_built;
+
+        return $this;
+    }
+
+    public function getGarage(): ?string
+    {
+        return $this->garage;
+    }
+
+    public function setGarage(string $garage): self
+    {
+        $this->garage = $garage;
+
+        return $this;
+    }
+
+    public function getSchoolDistrict(): ?string
+    {
+        return $this->school_district;
+    }
+
+    public function setSchoolDistrict(string $school_district): self
+    {
+        $this->school_district = $school_district;
+
+        return $this;
+    }
+
+    public function getHighSchool(): ?string
+    {
+        return $this->high_school;
+    }
+
+    public function setHighSchool(string $high_school): self
+    {
+        $this->high_school = $high_school;
+
+        return $this;
+    }
+
+    public function getMiddlleSchool(): ?string
+    {
+        return $this->middlle_school;
+    }
+
+    public function setMiddlleSchool(string $middlle_school): self
+    {
+        $this->middlle_school = $middlle_school;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

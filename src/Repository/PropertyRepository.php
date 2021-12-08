@@ -56,6 +56,16 @@ class PropertyRepository extends ServiceEntityRepository
 
         return (int) $count;
     }
+    
+    public function countByCat($value): int
+    {
+        $count = $this->createQueryBuilder('p')
+        ->select('count(p.id)')
+        ->where("p.category = $value")
+            ->getQuery()
+            ->getSingleScalarResult();
+        return (int) $count;
+    }
 
     private function findLimit(): int
     {
@@ -69,4 +79,6 @@ class PropertyRepository extends ServiceEntityRepository
     {
         return $this->paginator->paginate($query, $page, $this->findLimit());
     }
+
+    
 }
