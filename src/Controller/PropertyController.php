@@ -42,7 +42,7 @@ final class PropertyController extends BaseController
                 'slides' => $slides,
                 'categories' => $categories,
                 'searchParams' => $searchParams,
-                
+
             ]
         );
     }
@@ -107,6 +107,7 @@ final class PropertyController extends BaseController
                 'properties' => $repository->findSimilarProperties($property),
                 'number_of_photos' => \count($property->getPhotos()),
                 'show_back_button' => $show_back_button ?? false,
+                
             ]
         );
     }
