@@ -170,7 +170,6 @@ class Property
     private $description;
 
 
-
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -618,6 +617,7 @@ class Property
 
         return $this;
     }
+
 
 
 }
