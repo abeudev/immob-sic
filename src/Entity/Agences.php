@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AgencesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,11 +59,17 @@ class Agences
      */
     private $structure_id;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="AgenceId")
+     */
+    private $users;
+
 
     public function __construct()
     {
         $this->dateCreation= new \DateTimeImmutable();
         $this->dateModification= new \DateTimeImmutable();
+        $this->users = new ArrayCollection();
     }
     
     public function getId(): ?int
@@ -163,6 +171,36 @@ class Agences
     public function setStructureId(?Structures $structure_id): self
     {
         $this->structure_id = $structure_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setAgenceId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getAgenceId() === $this) {
+                $user->setAgenceId(null);
+            }
+        }
 
         return $this;
     }

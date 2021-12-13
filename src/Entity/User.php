@@ -92,6 +92,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $rdvs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Agences::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $AgenceId;
+
    
 
     public function __construct()
@@ -362,6 +368,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $rdv->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAgenceId(): ?Agences
+    {
+        return $this->AgenceId;
+    }
+
+    public function setAgenceId(?Agences $AgenceId): self
+    {
+        $this->AgenceId = $AgenceId;
 
         return $this;
     }
