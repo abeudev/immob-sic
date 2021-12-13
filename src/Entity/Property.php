@@ -159,6 +159,16 @@ class Property
      */
     private $img;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $img_slide;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
 
 
     public function __construct()
@@ -581,6 +591,30 @@ class Property
     public function setImg(string $img): self
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function getImgSlide(): ?string
+    {
+        return $this->img_slide;
+    }
+
+    public function setImgSlide(string $img_slide): self
+    {
+        $this->img_slide = $img_slide;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
