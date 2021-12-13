@@ -10,20 +10,16 @@
 				<div class="form-group">
 					<label for="select-search-1" class="form-label rd-input-label focus not-empty">Emplacement</label>
 					<select id="select-search-1" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-						<option value="Denver" selected="selected">Denver</option>
-						<option value="Houston">Houston</option>
-						<option value="Las Vegas">Las Vegas</option>
-						<option value="Orlando">Orlando</option>
-						<option value="Phoenix">Phoenix</option>
-						<option value="San Diego">San Diego</option>
-						<option value="Miami">Miami</option>
-						<option value="Atlanta">Atlanta</option>
+						<option value="Any" selected="selected">Tous</option>
+						{% for property in properties %}
+							<option value="{{property.address}}">{{property.address}}</option>
+						{% endfor %}
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="select-search-2" class="form-label rd-input-label focus not-empty">Property Status</label>
+					<label for="select-search-2" class="form-label rd-input-label focus not-empty">Statut de la propriété</label>
 					<select id="select-search-2" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-						<option value="Any" selected="selected">Any</option>
+						<option value="Any" selected="selected">Tous</option>
 						<option value="Vacant land">Vacant land</option>
 						<option value="Commercial">Commercial</option>
 						<option value="Residential">Residential</option>
@@ -32,36 +28,14 @@
 						<option value="Townhouses">Townhouses</option>
 						<option value="Foreclosures">Foreclosures</option>
 					</select>
-					<span class="select2 select2-container select2-container--bootstrap" dir="ltr" style="width: 255px;">
-						<span class="selection">
-							<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-select-search-2-container">
-								<span class="select2-selection__rendered" id="select2-select-search-2-container" title="Any">Any</span>
-								<span class="select2-selection__arrow" role="presentation">
-									<b role="presentation"></b>
-								</span>
-							</span>
-						</span>
-						<span class="dropdown-wrapper" aria-hidden="true"></span>
-					</span>
 				</div>
 				<div class="form-group">
 					<label for="select-search-3" class="form-label rd-input-label focus not-empty">Property Type</label>
 					<select id="select-search-3" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-						<option value="Any" selected="selected">Any</option>
+						<option value="Any" selected="selected">Tous</option>
 						<option value="Under Construction">Under Construction</option>
 						<option value="Ready to Move">Ready to Move</option>
 					</select>
-					<span class="select2 select2-container select2-container--bootstrap" dir="ltr" style="width: 255px;">
-						<span class="selection">
-							<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-select-search-3-container">
-								<span class="select2-selection__rendered" id="select2-select-search-3-container" title="Any">Any</span>
-								<span class="select2-selection__arrow" role="presentation">
-									<b role="presentation"></b>
-								</span>
-							</span>
-						</span>
-						<span class="dropdown-wrapper" aria-hidden="true"></span>
-					</span>
 				</div>
 				<div class="form-group width-1">
 					<span>Price (USD)
