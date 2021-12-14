@@ -3,6 +3,7 @@
 	<div data-height="" data-min-height="600px" class="swiper-container swiper-slider swiper-container-horizontal">
 		<div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-3806px, 0px, 0px);">
 			{% for property in properties %}
+				{% if property.inslide == true %}
 				<div data-slide-bg="/new/images/{{property.getImgSlide}}" class="swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="background-image: url('{{ asset('/new/images/'~ property.getImgSlide)}}'); background-size: cover; width: 1903px;">
 					<div class="swiper-slide-caption">
 						<div class="container">
@@ -18,6 +19,7 @@
 						</div>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		</div>
 		<!-- Swiper Navigation-->

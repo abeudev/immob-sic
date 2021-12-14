@@ -12,6 +12,7 @@ use App\Repository\FilterRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\SlideRepository;
 use App\Repository\CategoriesRepository;
+use App\Repository\TypePropertyRepository;
 use App\Repository\SimilarRepository;
 use App\Service\URLService;
 use App\Transformer\RequestToArrayTransformer;
@@ -25,7 +26,7 @@ final class PropertyController extends BaseController
     /**
      * @Route("/", defaults={"page": "1"}, methods={"GET"}, name="property")
      */
-    public function search(Request $request, FilterRepository $repository, SlideRepository $slideRepository, CategoriesRepository $categoryRepository, RequestToArrayTransformer $transformer): Response
+    public function search(Request $request, FilterRepository $repository, SlideRepository $slideRepository, CategoriesRepository $categoryRepository, TypePropertyRepository $typePropertyRepository, RequestToArrayTransformer $transformer): Response
     {
 
        // dd($request);
@@ -35,12 +36,14 @@ final class PropertyController extends BaseController
         $properties = $repository->findByFilter($searchParams);
         $slides = $slideRepository->findAll($searchParams);
         $categories = $categoryRepository->findAll($searchParams);
+        $typeProperty = $typePropertyRepository->findAll($searchParams);
         return $this->render('property/index.html.twig',
             [
                 'site' => $this->site(),
                 'properties' => $properties,
                 'slides' => $slides,
                 'categories' => $categories,
+                'types' => $typeProperty,
                 'searchParams' => $searchParams,
 
             ]
