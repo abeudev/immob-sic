@@ -619,9 +619,6 @@ class Property
     }
 
 
-<<<<<<< HEAD
-}
-=======
 
 }
->>>>>>> 5c6b6bd2e6ee2873bab19fb11cc9941590dd86c6
+
