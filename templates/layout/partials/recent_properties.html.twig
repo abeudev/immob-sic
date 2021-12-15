@@ -53,7 +53,7 @@
 									{{property.garage}}
 									garage(s)</li>
 							</ul>
-							<p class="text-abbey">{{property.propertyDescription.content}}</p>
+							<p class="text-abbey">{{property.propertyDescription.content | slice (0, 400) | raw   }}</p>
 						</div>
 					</div>
 				</div>

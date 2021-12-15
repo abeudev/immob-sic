@@ -10,7 +10,7 @@
 								<div data-caption-animate="fadeInDown" class="swiper-caption-wrap not-animated">
 									<p data-caption-animate="fadeIn" data-caption-delay="800" class="h3 not-animated">{{property.slug}}</p>
 									<hr data-caption-animate="fadeIn" data-caption-delay="800" class="not-animated">
-									<p data-caption-animate="fadeIn" data-caption-delay="800" class="hidden-xs not-animated">{{property.propertyDescription.content}}</p>
+									<p data-caption-animate="fadeIn" data-caption-delay="800" class="hidden-xs not-animated">{{property.propertyDescription.content | slice (0, 400) | raw   }}</p>
 									<div data-caption-animate="fadeIn" data-caption-delay="800" class="price text-ubold not-animated">{{property.price}}
 										FCFA
 										<span>/ jour</span>

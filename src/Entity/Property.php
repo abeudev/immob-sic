@@ -159,10 +159,7 @@ class Property
      */
     private $img_slide;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $description;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -599,17 +596,7 @@ class Property
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
+  
 
     public function getInSlide(): ?bool
     {
