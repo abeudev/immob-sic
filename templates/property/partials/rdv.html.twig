@@ -23,6 +23,27 @@
                         <div class="form-group">
                     <label for="contact-email2" class="form-label">Heure du DRV</label>
 
+{# {% for j in i.rooms %}
+{% if j.roomfloor < 6  %}
+    {{ j.roomtype }}
+{% endif %}
+{% endfor %} #}
+
+<select class="form-control" id="supervisor">
+{% for i in 7..18 %}
+{% for j in 0..1 %}
+{% if (j/1)  == 1  %}
+{% set m = 30 %}
+{% endif %}
+{% if  (j*1) == 0 %}
+{% set m = "00" %}
+{% endif %}
+<option value="{{ i }}:{{ m}}">
+      {{ i }}:{{ m}}
+      </option>
+      {% endfor %}
+      {% endfor %}
+</select>
                     <input id="contact-rdvdate" type="time" name="rdvtime" data-constraints="@Required @Rdvtime" class="form-control">
                   </div>
 

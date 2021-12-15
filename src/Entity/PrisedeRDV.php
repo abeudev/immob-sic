@@ -32,6 +32,21 @@ class PrisedeRDV
      */
     private $dateRdv;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $contact_visiteur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prenoms;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +84,42 @@ class PrisedeRDV
     public function setDateRdv(\DateTimeInterface $dateRdv): self
     {
         $this->dateRdv = $dateRdv;
+
+        return $this;
+    }
+
+    public function getContactVisiteur(): ?string
+    {
+        return $this->contact_visiteur;
+    }
+
+    public function setContactVisiteur(?string $contact_visiteur): self
+    {
+        $this->contact_visiteur = $contact_visiteur;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenoms(): ?string
+    {
+        return $this->prenoms;
+    }
+
+    public function setPrenoms(?string $prenoms): self
+    {
+        $this->prenoms = $prenoms;
 
         return $this;
     }
