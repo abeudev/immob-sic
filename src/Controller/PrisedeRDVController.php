@@ -14,23 +14,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\BaseController;
 
-final class PrisedeRDVController extends BaseController 
+final class PrisedeRDVController extends BaseController
 {
      /**
      * @Route("/interesse/new", name="interesse_new")
      */
     public function home(Request $request): Response
     {
-        
+
         $priserdv = new PrisedeRDV();
-        //dd($_POST);
+        /*-id: null
+  -fullname: null
+  -phone: null
+  -dateRdv: null*/
+
+  
         $form = $this->createForm(PriseRdvType::class, $priserdv);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($priserdv);
             return $this->redirectToRoute('/');
         }
-    
+
         return $this->render('priserdv/new.html.twig', [
             'site' => $this->site(),
             'priserdv' => $priserdv,

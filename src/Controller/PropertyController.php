@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Property;
-use App\Entity\PrisedeRdv;
+use App\Entity\PrisedeRDV;
 use App\Form\Type\PriseRdvType;
 use App\Service\Admin\PropertyService;
+
+
 use App\Repository\FilterRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\SlideRepository;
@@ -103,6 +105,13 @@ final class PropertyController extends BaseController
             $show_back_button = true;
         }
 
+        $priserdv = new PrisedeRDV();
+        $form = $this->createForm(PriseRdvType::class, $priserdv);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $service->create($priserdv);
+            return $this->redirectToRoute('/');
+        }
         return $this->render('property/show.html.twig',
             [
                 'site' => $this->site(),
@@ -110,7 +119,8 @@ final class PropertyController extends BaseController
                 'properties' => $repository->findSimilarProperties($property),
                 'number_of_photos' => \count($property->getPhotos()),
                 'show_back_button' => $show_back_button ?? false,
-                
+                'form' => $form->createView(),
+
             ]
         );
     }

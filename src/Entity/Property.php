@@ -174,11 +174,6 @@ class Property
      */
     private $statutProperty;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=TypeProperty::class, inversedBy="property")
-     */
-    private $typeProperty;
-
 
     public function __construct()
     {
@@ -639,19 +634,4 @@ class Property
 
         return $this;
     }
-
-    public function getTypeProperty(): ?TypeProperty
-    {
-        return $this->typeProperty;
-    }
-
-    public function setTypeProperty(?TypeProperty $typeProperty): self
-    {
-        $this->typeProperty = $typeProperty;
-
-        return $this;
-    }
-
-
-
 }

@@ -1,0 +1,35 @@
+<div class="sidebar-module">
+                <h4 class="border-bottom">Prendre RDV pour une visite</h4>
+                <p>You can contact us any way that is convenient for you. We would be happy to answer your questions.</p>
+                <!-- RD Mailform-->
+                <form data-form-output="form-output-global" data-form-type="contact" method="post" action="{{path('interesse_new')}}" class="rd-mailform text-left offset-11">
+                  <div class="form-group">
+                    <label for="contact-name2" class="form-label">Your name</label>
+                    <input id="contact-name2" type="text" name="name" data-constraints="@Required" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-phone2" class="form-label">Your phone</label>
+                    <input id="contact-phone2" type="text" name="phone" data-constraints="@Required @Numeric" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email2" class="form-label">Your e-mail</label>
+                    <input id="contact-email2" type="email" name="email" data-constraints="@Required @Email" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email2" class="form-label">Date du DRV</label>
+
+                    <input id="contact-rdvdate" type="date" name="rdvdate" data-constraints="@Required @Rdvdate" class="form-control">
+                  </div>
+                        <div class="form-group">
+                    <label for="contact-email2" class="form-label">Heure du DRV</label>
+
+                    <input id="contact-rdvdate" type="time" name="rdvtime" data-constraints="@Required @Rdvtime" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="contact-message2" class="form-label">Message</label>
+                    <textarea id="contact-message2" name="message" data-constraints="@Required" placeholder="Hello! I`m interested in 7758 Laguna heights Court, San Francisco, MA 02127. Please contact me with more information." class="form-control min-height"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-sushi btn-sm">Prendre le RDV</button>
+                </form>
+              </div>

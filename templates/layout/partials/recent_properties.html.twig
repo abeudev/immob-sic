@@ -6,21 +6,15 @@
 			{% for property in properties %}
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="thumbnail thumbnail-3">
-						<a href="{{ path('property_show', {
-                            'id':  property.id,
-                            'citySlug': property.city.slug,
-                            'slug': property.slug}) }}" class="img-link">
+						<a href="{{ path('property_show', { 'id': property.id, 'citySlug': property.city.slug, 'slug': property.slug}) }}" class="img-link">
 							<img src="{{ asset('/new/images/'~ property.getImg)}}" alt="" width="370" height="250">
 						</a>
 						<div class="caption">
 							<h4>
-								<a href="{{ path('property_show', {
-                            'id':  property.id,
-                            'citySlug': property.city.slug,
-                            'slug': property.slug}) }}" class="text-sushi">{{property.slug}}</a>
+								<a href="{{ path('property_show', { 'id': property.id, 'citySlug': property.city.slug, 'slug': property.slug}) }}" class="text-sushi">{{property.slug}}</a>
 							</h4>
 							<span class="thumbnail-price h5">${{property.price}}/
-								<span class="mon text-regular">month</span>
+								<span class="mon text-regular">mois</span>
 							</span>
 							<ul class="describe-1">
 								<li>
@@ -38,17 +32,28 @@
 												<path d="M81,43.6v-7.1c0-1.3-1.1-2.4-2.4-2.4c-1.3,0-2.4,1.1-2.4,2.4v7.1c0,1.3,1.1,2.4,2.4,2.4                            C79.9,46,81,44.9,81,43.6"></path>
 											</g>
 										</svg>
-									</span>1200 sq ft</li>
+									</span>
+									{{property.area}}
+									pi²</li>
 								<li>
-									<span class="icon icon-sm icon-primary hotel-icon-10"></span>2 bathrooms</li>
+									<span class="icon icon-sm icon-primary hotel-icon-10"></span>
+									{{property.getBathroomsNumber}}
+									salle(s) de bain</li>
+
 							</ul>
 							<ul class="describe-2">
 								<li>
-									<span class="icon icon-sm icon-primary hotel-icon-05"></span>4 bedrooms</li>
+									<span class="icon icon-sm icon-primary hotel-icon-05"></span>
+									{{property.getBedroomsNumber}}
+									Chambre(s)</li>
+
+
 								<li>
-									<span class="icon icon-sm icon-primary hotel-icon-26"></span>2 garages</li>
+									<span class="icon icon-sm icon-primary hotel-icon-26"></span>
+									{{property.garage}}
+									garage(s)</li>
 							</ul>
-							<p class="text-abbey">Introducing Brooklyn's most unique and genteel address: 123 on the Park. A stately, one-of-a-kind rental residence directly overlooking Brooklyn's famed Prospect Park.</p>
+							<p class="text-abbey">{{property.propertyDescription.content}}</p>
 						</div>
 					</div>
 				</div>
