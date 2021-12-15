@@ -66,6 +66,42 @@ class PropertyRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
         return (int) $count;
     }
+    
+    public function MinPrice(): int
+    {
+        $minPrice = $this->createQueryBuilder('p')
+        ->select('min(p.price)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return (int) $minPrice;
+    }
+    
+    public function MaxPrice(): int
+    {
+        $maxPrice = $this->createQueryBuilder('p')
+        ->select('max(p.price)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return (int) $maxPrice;
+    }
+    
+    public function MinArea(): int
+    {
+        $minArea = $this->createQueryBuilder('p')
+        ->select('min(p.area)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return (int) $minArea;
+    }
+    
+    public function MaxArea(): int
+    {
+        $maxArea = $this->createQueryBuilder('p')
+        ->select('max(p.area)')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return (int) $maxArea;
+    }
 
     private function findLimit(): int
     {

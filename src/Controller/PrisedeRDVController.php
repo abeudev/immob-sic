@@ -28,10 +28,7 @@ final class PrisedeRDVController extends BaseController
   -phone: null
   -dateRdv: null*/
 
-  $priserdv->getHeure=$_POST["rdvdate"];
-  $priserdv->getHeure=$_POST["rdvdate"];
-  $priserdv->getDate=$_POST["rdvdate"];
-        dd($priserdv);
+  
         $form = $this->createForm(PriseRdvType::class, $priserdv);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

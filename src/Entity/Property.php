@@ -130,11 +130,6 @@ class Property
     private $area;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $year_built;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $garage;
@@ -167,7 +162,17 @@ class Property
     /**
      * @ORM\Column(type="string", length=255)
      */
-    //private $description;
+    private $description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $inSlide;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=StatutProperty::class, inversedBy="property")
+     */
+    private $statutProperty;
 
 
     public function __construct()
@@ -522,18 +527,6 @@ class Property
         return $this;
     }
 
-    public function getYearBuilt(): ?\DateTimeInterface
-    {
-        return $this->year_built;
-    }
-
-    public function setYearBuilt(\DateTimeInterface $year_built): self
-    {
-        $this->year_built = $year_built;
-
-        return $this;
-    }
-
     public function getGarage(): ?string
     {
         return $this->garage;
@@ -618,7 +611,27 @@ class Property
         return $this;
     }
 
+    public function getInSlide(): ?bool
+    {
+        return $this->inSlide;
+    }
 
+    public function setInSlide(bool $inSlide): self
+    {
+        $this->inSlide = $inSlide;
 
+        return $this;
+    }
+
+    public function getStatutProperty(): ?StatutProperty
+    {
+        return $this->statutProperty;
+    }
+
+    public function setStatutProperty(?StatutProperty $statutProperty): self
+    {
+        $this->statutProperty = $statutProperty;
+
+        return $this;
+    }
 }
-
