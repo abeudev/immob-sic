@@ -28,12 +28,14 @@ final class PropertyController extends BaseController
     /**
      * @Route("/", defaults={"page": "1"}, methods={"GET"}, name="property")
      */
-    public function search(Request $request, FilterRepository $repository, SlideRepository $slideRepository, CategoriesRepository $categoryRepository, TypePropertyRepository $typePropertyRepository, RequestToArrayTransformer $transformer): Response
+    public function search(Request $request, FilterRepository $repository,
+    SlideRepository $slideRepository, CategoriesRepository $categoryRepository,
+     TypePropertyRepository $typePropertyRepository, RequestToArrayTransformer $transformer): Response
     {
 
-       // dd($request);
+      
         $searchParams = $transformer->transform($request);
-      //dd($searchParams);
+
 
         $properties = $repository->findByFilter($searchParams);
         $slides = $slideRepository->findAll($searchParams);

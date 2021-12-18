@@ -42,6 +42,9 @@ final class UserController extends BaseController
             ->add('saveAndCreateNew', SubmitType::class);
         $form->handleRequest($request);
 
+
+
+        dd($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($user);
 

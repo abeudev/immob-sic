@@ -98,7 +98,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $AgenceId;
 
-   
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+   /**
+     * @Assert\EqualTo(propertyPath="password",message="Les deux mot de passe doivent être identiques")
+     */
+    private $passwordConfirm;
 
     public function __construct()
     {
@@ -380,6 +388,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAgenceId(?Agences $AgenceId): self
     {
         $this->AgenceId = $AgenceId;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPasswordConfirm(): ?string
+    {
+        return $this->passwordConfirm;
+    }
+
+    public function setPasswordConfirm(string $passwordConfirm): self
+    {
+        $this->passwordConfirm = $passwordConfirm;
 
         return $this;
     }

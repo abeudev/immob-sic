@@ -1,0 +1,67 @@
+
+{% extends 'layout/base_register.html.twig' %}
+
+{% block header %}
+	{{ include('layout/partials/header_home.html.twig') }}
+
+	{# {{ include('property/partials/_search_form.html.twig') }} #}
+{% endblock %}
+{% block body %}
+ <div class="container">
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Création de compte</h1>
+<section class="section-sm section-sm-mod-2 text-left">
+      <div class="container">
+        <div class="row">
+<div class="col-xs-12 col-sm-8 col-lg-5">
+    {{ form_start(registrationForm) }}
+        <div class="form-group">
+                {{ form_row(registrationForm.username,{'label':"Votre nom d'utilisateur :",'attr':{
+                    'placeholder':"", 'class':"form-control"
+                } }) }}
+                </div>
+        {{ form_row(registrationForm.plainPassword,{'label':"Votre mot de passe :",'attr':{
+                    'placeholder':"", 'class':"form-control"
+                } }) }}
+                 <div class="form-group">
+                {{ form_row(registrationForm.email,{'label':"email:",'attr':{
+                    'placeholder':"", 'class':"form-control"
+                } }) }}
+                </div>
+                <div class="form-group">
+              <label for="select-search-1" class="form-label rd-input-label focus not-empty">Type de compte</label>
+              <select id="select-search-1" name="type_compte" id="type_compte" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                <option value="Any" selected="selected">Choisir</option>
+                <option value="1">Locataire</option>
+                <option value="2">Propriétaire</option>
+
+              </select>
+            </div>
+
+                <div class="form-group">
+								{{ form_row(registrationForm.agreeTerms) }}
+                                <a href="{{ path('default_route')}}" target="_blank">Read Conditions</a>
+							</div>
+
+        <button type="submit" class="btn btn-sushi btn-sm btn-min-width-xs">Créer mon compte</button>
+    {{ form_end(registrationForm) }}
+    </div>
+
+</div>
+      </div>
+    </section>
+<!--Section Login-->
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
