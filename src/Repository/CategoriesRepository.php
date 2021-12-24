@@ -14,37 +14,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoriesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Categories::class);
     }
 
-    // /**
-    //  * @return Categories[] Returns an array of Categories objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function countAll(): int
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        $count = $this->createQueryBuilder('c')
+            ->select('count(c.id)')
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getSingleScalarResult();
 
-    /*
-    public function findOneBySomeField($value): ?Categories
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return (int) $count;
     }
-    */
 }
