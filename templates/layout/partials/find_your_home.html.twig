@@ -1,0 +1,152 @@
+<section class="section-sm section-bottom-0 bg-dark">
+	<div class="container position-margin-top undefined">
+		<div class="search-form-wrap bg-white container-shadow">
+			<h3>Trouvez votre maison</h3>
+			<form action="#" name="search-form" class="form-variant-1">
+				<div class="form-group">
+					<label for="keyword" class="form-label rd-input-label">Mot-clé</label>
+					<input id="keyword" type="text" name="keyword" placeholder="Recherche" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="select-search-1" class="form-label rd-input-label focus not-empty">Emplacement</label>
+					<select id="select-search-1" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+						<option value="Any" selected="selected">Tous</option>
+						{% for property in properties %}
+							<option value="{{property.address}}">{{property.address}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="select-search-2" class="form-label rd-input-label focus not-empty">Statut de la propriété</label>
+					<select id="select-search-2" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+						<option value="Any" selected="selected">Tous</option>
+						{% for property in properties %}
+							<option value="{{property.statutProperty.libelle}}">{{property.statutProperty.getLibelle}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="select-search-3" class="form-label rd-input-label focus not-empty">Property Type</label>
+					<select id="select-search-3" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+						<option value="Any" selected="selected">Tous</option>
+						{% for type in types %}
+							<option value="{{type.libelle}}">{{type.libelle}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group width-1">
+					<span>Prix (FCFA)
+						<br>
+					</span>
+					<div class="form-inline-flex-xs">
+						<input id="range-1" type="text" name="range-1" class="rd-range-input-value rd-range-input-value-1 form-control">
+						<span class="text-abbey dash">—</span>
+						<input id="range-2" type="text" name="range-2" class="rd-range-input-value rd-range-input-value-2 form-control">
+					</div>
+					<div data-min="{{minPrice()}}" data-max="{{maxPrice()}}" data-start="[{{minPrice()}}, {{maxPrice()}}]" data-step="1" data-tooltip="true" data-min-diff="1" data-input=".rd-range-input-value-1" data-input-2=".rd-range-input-value-2" class="rd-range hasTooltip">
+						<div class="rd-range__wrap">
+							<div class="rd-range__pointer rd-range__pointer-1" style="left: 5%;">
+								<div class="rd-range__pointer-tooltip">{{minPrice()}}</div>
+
+							</div>
+							<div class="rd-range__pointer rd-range__pointer-2" style="left: 95%;">
+								<div class="rd-range__pointer-tooltip">{{maxPrice()}}</div>
+							</div>
+							<div class="rd-range__line" style="left: 5%; width: 90%;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group width-1">
+					<span>Superficie (pi²)
+						<br>
+					</span>
+					<div class="form-inline-flex-xs">
+						<input id="range-3" type="text" name="range-3" class="rd-range-input-value rd-range-input-value-3 form-control">
+						<span class="text-abbey dash">—</span>
+						<input id="range-4" type="text" name="range-4" class="rd-range-input-value rd-range-input-value-4 form-control">
+					</div>
+					<div data-min="{{minArea()}}" data-max="{{maxArea()}}" data-start="[{{minArea()}}, {{maxArea()}}]" data-step="10" data-tooltip="true" data-min-diff="10" data-input=".rd-range-input-value-3" data-input-2=".rd-range-input-value-4" class="rd-range hasTooltip">
+						<div class="rd-range__wrap">
+							<div class="rd-range__pointer rd-range__pointer-1" style="left: 7%;">
+								<div class="rd-range__pointer-tooltip">{{minArea()}}</div>
+							</div>
+							<div class="rd-range__pointer rd-range__pointer-2" style="left: 91%;">
+								<div class="rd-range__pointer-tooltip">{{maxArea()}}</div>
+							</div>
+							<div class="rd-range__line" style="left: 7%; width: 84%;"></div>
+						</div>
+					</div>
+				</div>
+				{#
+					<div class="form-group width-2">
+						<label for="select-search-7" class="form-label rd-input-label focus not-empty">Min Beds</label>
+						<select id="select-search-7" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+							<option value="Any" selected="selected">Any</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+					<div class="form-group width-2">
+						<label for="select-search-8" class="form-label rd-input-label focus not-empty">Min Baths</label>
+						<select id="select-search-8" data-minimum-results-for-search="Infinity" class="form-control select-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+							<option value="Any" selected="selected">Any</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+				#}
+				<button class="btn btn-sm btn-sushi btn-min-width-sm">Chercher</button>
+				<div class="features">
+					<a href="" onclick="return false" class="btn-features">
+						<span></span>Look for certain features</a>
+					<ul class="checkbox-list list-inline">
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-1" type="checkbox" checked="checked" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Central Heating (7)</span>
+							</label>
+						</li>
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-2" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Lawn (6)</span>
+							</label>
+						</li>
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-3" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Marble Floors (8)</span>
+							</label>
+						</li>
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-4" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Fire Alarm (5)</span>
+							</label>
+						</li>
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-5" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Home Theater (3)</span>
+							</label>
+						</li>
+						<li>
+							<label class="checkbox-inline">
+								<input name="input-group-radio" value="checkbox-6" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span>
+								<span>Hurricane Shutters (1)</span>
+							</label>
+						</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

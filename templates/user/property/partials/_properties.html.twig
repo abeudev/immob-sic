@@ -1,104 +1,96 @@
 <div class="row">
-    {% for property in properties %}
+	{% for property in properties %}
 
-        {# Item #}
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="card full-xs">
+		{# Item #}
+		<div class="col-lg-6 col-md-12 col-sm-12">
+			<div class="card full-xs">
 
-                <div class="property-box-img">
+				<div class="property-box-img">
 
-                    <a href="{{ path('property_show', {
-                        'id':  property.id,
-                        'citySlug': property.city.slug,
-                        'slug': property.slug}) }}">
+					<a href="{{ path('property_show', { 'id': property.id, 'citySlug': property.city.slug, 'slug': property.slug}) }}">
 
-                        {% for photo in property.photos | slice(0, 1) %}
+						{% for photo in property.photos | slice(0, 1) %}
 
-                            <img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}"
-                                 data-src="/uploads/images/small/{{ photo.photo }}"
-                                 alt="{{ property.address }}"
-                                 title="{{ property.address }}"/>
+							<img class="card-img-top lazyload" src="{{ asset('/images/transparent.png') }}" data-src="/uploads/images/small/{{ photo.photo }}" alt="{{ property.address }}" title="{{ property.address }}"/>
 
-                        {% else %}
+						{% else %}
 
-                            <img class="card-img-top border-bottom"
-                                 src="{{ asset('/images/no-photo.png') }}"
-                                 alt="{{ property.address }}"
-                                 title="{{ property.address }}"/>
+							<img class="card-img-top border-bottom" src="{{ asset('/images/no-photo.png') }}" alt="{{ property.address }}" title="{{ property.address }}"/>
 
-                        {% endfor %}
+						{% endfor %}
 
-                        {% if property.price != '' %}
-                            <span class="price">
-                                    {{ site.currency.symbolLeft }}{{ property.price }}
-                                {{ site.currency.symbolRight }}
+						{% if property.price != '' %}
+							<span class="price">
+								{{ site.currency.symbolLeft }}{{ property.price }}
+								{{ site.currency.symbolRight }}
 
-                                {% if property.priceType != '' %}
-                                    / {{ property.priceType }}
-                                {% endif %}
-                                </span>
-                        {% endif %}
-                    </a>
-                </div>
+								{% if property.priceType != '' %}
+									/
+									{{ property.priceType }}
+								{% endif %}
+							</span>
+						{% endif %}
 
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{{ path('property_show', {
-                            'id':  property.id,
-                            'citySlug': property.city.slug,
-                            'slug': property.slug}) }}">
-                            {{ property.propertyDescription.title }}
-                        </a>
-                    </h5>
-                    <p class="small icon-green">
-                        <i class="fas fa-map-marker-alt"></i> {{ property.address }}
-                    </p>
+					</a>
+				</div>
 
-                    {% if property.metroStation %}
-                        <p class="small icon-green">
-                            <i class="fas fa-subway"></i> {{ property.metroStation.name }}
-                        </p>
-                    {% endif %}
+				<div class="card-body">
+					<h5 class="card-title">
+						<a href="{{ path('property_show', { 'id': property.id, 'citySlug': property.city.slug, 'slug': property.slug}) }}">
+							{{ property.propertyDescription }}
+						</a>
+					</h5>
+					<p class="small icon-green">
+						<i class="fas fa-map-marker-alt"></i>
+						{{ property.address }}
+					</p>
 
-                    <span class="attribute">{{ property.dealType.name }}</span>
-                    <span class="attribute">{{ property.category.name }}</span>
+					{% if property.metroStation %}
+						<p class="small icon-green">
+							<i class="fas fa-subway"></i>
+							{{ property.metroStation.name }}
+						</p>
+					{% endif %}
 
-                    {% if property.bedroomsNumber %}
-                        <span class="attribute">
-                            {{ 'property.bedrooms'|trans }}: {{ property.bedroomsNumber }}
-                        </span>
-                    {% endif %}
+					<span class="attribute">{{ property.dealType.name }}</span>
+					<span class="attribute">{{ property.category.name }}</span>
 
-                    <br>
-                    {% if property.state == 'published' %}
+					{% if property.bedroomsNumber %}
+						<span class="attribute">
+							{{ 'property.bedrooms'|trans }}:
+							{{ property.bedroomsNumber }}
+						</span>
+					{% endif %}
 
-                        <a href="{{ path('user_property_unpublish', {id: property.id, token: csrf_token('update')}) }}"
-                           class="btn btn-outline-secondary mt-3">
-                            <i class="fas fa-eye-slash"></i> {{ 'action.unpublish'|trans }}
-                        </a>
+					<br>
+					{% if property.state == 'published' %}
 
-                    {% elseif property.state == 'private' %}
+						<a href="{{ path('user_property_unpublish', {id: property.id, token: csrf_token('update')}) }}" class="btn btn-outline-secondary mt-3">
+							<i class="fas fa-eye-slash"></i>
+							{{ 'action.unpublish'|trans }}
+						</a>
 
-                        <a href="{{ path('user_property_publish', {id: property.id, token: csrf_token('update')}) }}"
-                           class="btn btn-outline-secondary mt-3">
-                            <i class="far fa-share-square"></i> {{ 'action.publish'|trans }}
-                        </a>
+					{% elseif property.state == 'private' %}
 
-                    {% endif %}
+						<a href="{{ path('user_property_publish', {id: property.id, token: csrf_token('update')}) }}" class="btn btn-outline-secondary mt-3">
+							<i class="far fa-share-square"></i>
+							{{ 'action.publish'|trans }}
+						</a>
 
-                    <a href="{{ url('user_property_edit', {id: property.id}) }}"
-                       class="btn btn-light mt-3">{{ 'action.edit' | trans }}</a>
+					{% endif %}
 
-                </div>
-            </div>
-            <br>
-        </div>
+					<a href="{{ url('user_property_edit', {id: property.id}) }}" class="btn btn-light mt-3">{{ 'action.edit' | trans }}</a>
 
-        {# / Item #}
+				</div>
+			</div>
+			<br>
+		</div>
 
-    {% else %}
-        <div class="col-sm-12">
-            {{ 'no_items_found' | trans }}
-        </div>
-    {% endfor %}
+		{# / Item #}
+
+	{% else %}
+		<div class="col-sm-12">
+			{{ 'no_items_found' | trans }}
+		</div>
+	{% endfor %}
 </div>

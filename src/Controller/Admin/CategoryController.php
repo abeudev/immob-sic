@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\BaseController;
-use App\Entity\Category;
+use App\Entity\Categories;
 use App\Form\Type\CategoryType;
-use App\Repository\CategoryRepository;
+use App\Repository\CategoriesRepository;
 use App\Service\Admin\CategoryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\ClickableInterface;
@@ -21,7 +21,7 @@ final class CategoryController extends BaseController
     /**
      * @Route("/admin/category", name="admin_category")
      */
-    public function index(CategoryRepository $repository): Response
+    public function index(CategoriesRepository $repository): Response
     {
         $categories = $repository->findAll();
 
@@ -36,7 +36,7 @@ final class CategoryController extends BaseController
      */
     public function new(Request $request, CategoryService $service): Response
     {
-        $category = new Category();
+        $category = new Categories();
 
         $form = $this->createForm(CategoryType::class, $category)
             ->add('saveAndCreateNew', SubmitType::class);

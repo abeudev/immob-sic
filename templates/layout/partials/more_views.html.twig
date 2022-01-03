@@ -1,0 +1,21 @@
+<section class="section-md text-center text-sm-left bg-dark">
+	<div class="container">
+		<h2>Catégories populaires</h2>
+		<hr>
+		<div class="row offset-11">
+			{% for category in categories %}
+				<div class="col-xs-12 col-sm-6">
+					<a href="#" class="img-thumbnail-variant-1">
+						<img src="{{ asset('/new/images/'~ category.getImg)}}" alt="" width="570" height="380">
+
+						<div class="caption">
+							<h4 class="text-white">{{category.getName}}</h4>
+							<p>{{countCatelt(category.id)}}
+								propriété(s)</p>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

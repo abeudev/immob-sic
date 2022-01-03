@@ -7,6 +7,7 @@ namespace App\Twig;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 final class AppExtension extends AbstractExtension
 {
@@ -31,4 +32,19 @@ final class AppExtension extends AbstractExtension
     {
         return ($number > 1) ? ' - '.$this->translator->trans('page').' '.$number : '';
     }
+
+
+   public function getFunctions()
+    {
+        return [
+            new TwigFunction('area', [$this, 'calculateArea']),
+        ];
+    }
+
+    public function calculateArea(int $width, int $length)
+    {
+        return $width * $length;
+    }
+
+    
 }

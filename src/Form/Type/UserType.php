@@ -1,17 +1,13 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Valery Maslov
- * Date: 24.08.2018
- * Time: 10:07.
- */
 
 namespace App\Form\Type;
 
 use App\Entity\User;
+use App\Entity\Agences;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +32,11 @@ final class UserType extends AbstractType
                     'label_attr' => ['class' => 'switch-custom'],
                 ]
             )
+            ->add('AgenceId', EntityType::class, [
+                'class' => Agences::class,
+                'choice_label' => 'libelle',
+                'label' => 'Agence',
+            ])
             ->add('username', null, [
                 'label' => 'label.username',
             ])
