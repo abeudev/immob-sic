@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
+use App\Entity\Categories;
 use App\Entity\City;
 use App\Entity\DealType;
 use App\Entity\District;
@@ -19,6 +19,7 @@ use App\Entity\Metro;
 use App\Entity\Neighborhood;
 use App\Entity\Property;
 use App\Entity\User;
+use App\Entity\StatutProperty;
 use App\Form\EventSubscriber\AddAgentFieldSubscriber;
 use App\Form\EventSubscriber\AddDistrictFieldSubscriber;
 use App\Form\EventSubscriber\AddMetroFieldSubscriber;
@@ -58,29 +59,11 @@ final class PropertyType extends AbstractType
                 'placeholder' => 'placeholder.select_city',
                 'label' => 'label.city',
             ])
-            ->add('district', EntityType::class, [
-                'class' => District::class,
-                'choice_label' => 'name',
-                'placeholder' => 'placeholder.select_district',
-                'label' => 'label.district',
-                'required' => false,
-                'choices' => [],
-            ])
-            ->add('neighborhood', EntityType::class, [
-                'class' => Neighborhood::class,
-                'choice_label' => 'name',
-                'placeholder' => 'placeholder.select_neighborhood',
-                'label' => 'label.neighborhood',
-                'required' => false,
-                'choices' => [],
-            ])
-            ->add('metro_station', EntityType::class, [
-                'class' => Metro::class,
-                'choice_label' => 'name',
-                'placeholder' => 'placeholder.select_metro_station',
-                'label' => 'label.metro_station_name',
-                'required' => false,
-                'choices' => [],
+            ->add('statutProperty', EntityType::class, [
+                'class' => StatutProperty::class,
+                'choice_label' => 'libelle',
+                'placeholder' => 'Satut de la propriété',
+                'label' => 'Statut',
             ])
             ->add('dealType', EntityType::class, [
                 'class' => DealType::class,
@@ -88,7 +71,7 @@ final class PropertyType extends AbstractType
                 'label' => 'label.deal_type',
             ])
             ->add('category', EntityType::class, [
-                'class' => Category::class,
+                'class' => Categories::class,
                 'choice_label' => 'name',
                 'label' => 'label.category',
             ])

@@ -38,13 +38,15 @@ final class PropertyController extends BaseController
      */
     public function new(Request $request, PropertyService $service): Response
     {
+
+        
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($property);
-
             return $this->redirectToRoute('admin_photo_edit', ['id' => $property->getId()]);
         }
 
