@@ -1,87 +1,206 @@
+<style type="text/css">
+
+
+	.center {
+		position: absolute;
+		top: 50.9%;
+		left: 25%;
+		transform: translate(-50%, -50%);
+	}
+
+	.center button {
+		padding: 10px 20px;
+		font-size: 15px;
+		font-weight: 600;
+		color: #222;
+		background: #f5f5f5;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+
+	.popup {
+		position: absolute;
+		top: -150%;
+		left: 50%;
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(1.25);
+		width: 380px;
+		padding: 20px 30px;
+		background: #fff;
+		box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+		border-radius: 10px;
+		transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0, transform 20ms ease-in-out 0;
+	}
+
+	.popup.active {
+		top: 50%;
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+		transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0, transform 20ms ease-in-out 0;
+	}
+
+	.popup .close-btn {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 15px;
+		height: 15px;
+		background: #888;
+		color: #eee;
+		text-align: center;
+		line-height: 15px;
+		border-radius: 15px;
+		cursor: pointer;
+	}
+
+	.popup .form h2 {
+		text-align: center;
+		color: #222;
+		margin: 10px 0 20px;
+		font-size: 25px;
+	}
+
+	.popup .form .form-element {
+		margin: 15px 0;
+	}
+
+	.popup .form .form-element label {
+		font-size: 14px;
+		color: #222;
+	}
+
+	.popup .form .form-element input[type="text"],
+	.popup .form .form-element input[type="date"],
+	.popup .form .form-element input[type="password"] {
+		margin-top: 5px;
+		display: block;
+		width: 100%;
+		padding: 10px;
+		outline: none;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+	}
+
+	.popup .form .form-element input[type="checkbox"] {
+		margin-right: 5px;
+	}
+
+	.popup .form .form-element button {
+		width: 100%;
+		height: 40px;
+		border: none;
+		outline: none;
+		font-size: 16px;
+		background: #222;
+		color: #f5f5f5;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	.popup .form .form-element a {
+		display: block;
+		text-align: right;
+		font-size: 15px;
+		color: #1a79ca;
+		text-decoration: none;
+		font-weight: 600;
+	}
+</style>
+
 <div class="overview">
-    <table>
-        <tbody>
-        <tr>
-            <th>{{ 'property.location' | trans }}:</th>
-            <td>
-                {% if property.neighborhood.name | default %}
-                    {{ property.neighborhood.name }},
-                {% elseif property.district.name | default %}
-                    {{ property.district.name }},
-                {% endif %}
-                <a href="{{ path('city', {slug: property.city.slug}) }}">{{ property.city.name }}</a>
-            </td>
-        </tr>
+	<table>
+		<tbody>
+			<tr>
+				<th>{{ 'property.location' | trans }}:</th>
+				<td>
+					{% if property.neighborhood.name | default %}
+						{{ property.neighborhood.name }},
+					{% elseif property.district.name | default %}
+						{{ property.district.name }},
+					{% endif %}
+					<a href="{{ path('city', {slug: property.city.slug}) }}">{{ property.city.name }}</a>
+				</td>
+			</tr>
 
-        {% if property.metroStation %}
+			{% if property.metroStation %}
 
-            <tr>
-                <th>{{ 'metro_station' | trans }}:</th>
-                <td>{{ property.metroStation.name }}</td>
-            </tr>
+				<tr>
+					<th>{{ 'metro_station' | trans }}:</th>
+					<td>{{ property.metroStation.name }}</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        <tr>
-            <th>{{ 'property.deal_type' | trans }}:</th>
-            <td>{{ property.dealType.name }}</td>
-        </tr>
-        <tr>
-            <th>{{ 'property.category' | trans }}:</th>
-            <td>{{ property.category.name }}</td>
-        </tr>
+			<tr>
+				<th>{{ 'property.deal_type' | trans }}:</th>
+				<td>{{ property.dealType.name }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'property.category' | trans }}:</th>
+				<td>{{ property.category.name }}</td>
+			</tr>
 
-        {% if property.bathroomsNumber != '' %}
+			{% if property.bathroomsNumber != '' %}
 
-            <tr>
-                <th>{{ 'property.bathrooms' | trans }}:</th>
-                <td>{{ property.bathroomsNumber }}</td>
-            </tr>
+				<tr>
+					<th>{{ 'property.bathrooms' | trans }}:</th>
+					<td>{{ property.bathroomsNumber }}</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        {% if property.bedroomsNumber != '' %}
+			{% if property.bedroomsNumber != '' %}
 
-            <tr>
-                <th>{{ 'property.bedrooms' | trans }}:</th>
-                <td>{{ property.bedroomsNumber }}</td>
-            </tr>
+				<tr>
+					<th>{{ 'property.bedrooms' | trans }}:</th>
+					<td>{{ property.bedroomsNumber }}</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        {% if property.maxGuests != '' %}
+			{% if property.maxGuests != '' %}
 
-            <tr>
-                <th>{{ 'property.max_guests' | trans }}:</th>
-                <td>{{ property.maxGuests }}</td>
-            </tr>
+				<tr>
+					<th>{{ 'property.max_guests' | trans }}:</th>
+					<td>{{ property.maxGuests }}</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        {% if property.availableNow == '1' %}
+			{% if property.availableNow == '1' %}
 
-            <tr>
-                <th>{{ 'property.available_now' | trans }}:</th>
-                <td>{{ 'yes' | trans }}</td>
-            </tr>
+				<tr>
+					<th>{{ 'property.available_now' | trans }}:</th>
+					<td>{{ 'yes' | trans }}</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        {% if property.price != '' %}
+			{% if property.price != '' %}
 
-            <tr>
-                <th>{{ 'property.price' | trans }}:</th>
-                <td>{{ site.currency.symbolLeft }}{{ property.price }}
-                    {{ site.currency.symbolRight }}
+				<tr>
+					<th>{{ 'property.price' | trans }}:</th>
+					<td>{{ site.currency.symbolLeft }}{{ property.price }}
+						{{ site.currency.symbolRight }}
 
-                    {% if property.priceType != '' %}
-                        / {{ property.priceType }}
-                    {% endif %}
-                </td>
-            </tr>
+						{% if property.priceType != '' %}
+							/
+							{{ property.priceType }}
+						{% endif %}
+					</td>
+				</tr>
 
-        {% endif %}
+			{% endif %}
 
-        </tbody>
-    </table>
-</div>
+			<th>{{ 'Action :'}}</th>
+			<td>
+				<a href="{{ url('interesse_new') }}" class="btn btn-primary">
+					Je suis intéressé
+				</a>
+			</td>
+
+		</tbody>
+	</tbody>
+</table></div>

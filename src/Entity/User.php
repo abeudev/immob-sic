@@ -77,9 +77,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $profile;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Contrat::class, mappedBy="user")
+     */
+    private $contrats;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="user")
+     */
+    private $ventes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="utilisateur")
+     */
+    private $rdvs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Agences::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $AgenceId;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+   /**
+     * @Assert\EqualTo(propertyPath="password",message="Les deux mot de passe doivent être identiques")
+     */
+    private $passwordConfirm;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->contrats = new ArrayCollection();
+        $this->ventes = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getUsername(): ?string
@@ -255,4 +289,131 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Contrat[]
+     */
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrat(Contrat $contrat): self
+    {
+        if (!$this->contrats->contains($contrat)) {
+            $this->contrats[] = $contrat;
+            $contrat->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrat(Contrat $contrat): self
+    {
+        if ($this->contrats->removeElement($contrat)) {
+            // set the owning side to null (unless already changed)
+            if ($contrat->getUser() === $this) {
+                $contrat->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vente[]
+     */
+    public function getVentes(): Collection
+    {
+        return $this->ventes;
+    }
+
+    public function addVente(Vente $vente): self
+    {
+        if (!$this->ventes->contains($vente)) {
+            $this->ventes[] = $vente;
+            $vente->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVente(Vente $vente): self
+    {
+        if ($this->ventes->removeElement($vente)) {
+            // set the owning side to null (unless already changed)
+            if ($vente->getUser() === $this) {
+                $vente->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->removeElement($rdv)) {
+            // set the owning side to null (unless already changed)
+            if ($rdv->getUtilisateur() === $this) {
+                $rdv->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAgenceId(): ?Agences
+    {
+        return $this->AgenceId;
+    }
+
+    public function setAgenceId(?Agences $AgenceId): self
+    {
+        $this->AgenceId = $AgenceId;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPasswordConfirm(): ?string
+    {
+        return $this->passwordConfirm;
+    }
+
+    public function setPasswordConfirm(string $passwordConfirm): self
+    {
+        $this->passwordConfirm = $passwordConfirm;
+
+        return $this;
+    }
+
 }

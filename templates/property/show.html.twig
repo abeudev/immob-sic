@@ -1,20 +1,21 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block title %}{{ property.propertyDescription.metaTitle|default(property.propertyDescription.title) }}{% endblock %}
-{% block description %}{{ property.propertyDescription.metaDescription }}{% endblock %}
-
-{% block stylesheets %}
-
-    {{ encore_entry_link_tags('css/detail') }}
-    {{ encore_entry_link_tags('css/ekko-lightbox') }}
-
+{% block title %}
+	{{ site.meta_title }}{{ searchParams.page|page }}
 {% endblock %}
 
-{% block header %}{% endblock %}
+{% block description %}
+	{{ site.meta_description }}{{ searchParams.page|page }}
+{% endblock %}
 
+{% block header %}
+	{{ include('layout/partials/header_home.html.twig') }}
+
+	{# {{ include('property/partials/_search_form.html.twig') }} #}
+{% endblock %}
 {% block body %}
-
-    {% if is_granted('ROLE_ADMIN') %}
+<body>
+  {% if is_granted('ROLE_ADMIN') %}
 
         <a href="{{ url('admin_property_edit', {id: property.id}) }}" class="btn btn-primary float">
             <i class="fas fa-pen float-icon"></i>
@@ -23,84 +24,47 @@
     {% endif %}
 
     <br>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card full-xs mb-4">
+  <!-- Page-->
+  <div class="page">
+    <!-- Page Header-->
 
-                {{ include('property/partials/_slider.html.twig') }}
+    <!-- Section Title Breadcrumbs-->
+ {{ include('property/partials/header.html.twig') }}
+    <!-- Section Catalog Single Left-->
 
-                <div class="card-body">
+    <section class="section-sm section-sm-mod-2 text-left">
+      <div class="container">
+        <div class="row">
+         {{ include('property/partials/carousel.html.twig') }}
+         {{ include('property/partials/comment.html.twig') }}
+          <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="sidebar sidebar-mod-1">
+              <div class="sidebar-module">
+                <!-- RD Google Map-->
+                {{ include('property/partials/map.html.twig') }}
 
-                    <h4 class="card-title">{{ property.propertyDescription.title }}</h4>
+              </div>
+               {{ include('property/partials/rdv.html.twig') }}
+              {{ include('property/partials/agent_info.html.twig') }}
+            {{ include('property/partials/share.html.twig') }}
 
-                    <p class="address">{{ property.address }}</p>
+             {% if properties %}
+            {{ include('property/partials/_similar_properties.html.twig') }}
+            {% endif %} {{ include('property/partials/recent.html.twig') }}
 
-                    {{ include('property/partials/_overview.html.twig') }}
 
-                    {{ property.propertyDescription.content | raw }}
 
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        {% for feature in property.features %}
-                            <div class="col-lg-4 col-md-6 col-sm-6 icon-green">
-                                {{ feature.icon|default('<i class="fas fa-check"></i>')|raw }}
-                                {{ feature.name }}
-                            </div>
-                        {% endfor %}
-                    </div>
-
-                    <div id="map"
-                         data-balloonContent="{{ property.propertyDescription.title }}"
-                         data-hintContent="{{ property.category.name }}"
-                         data-latitude="{{ property.latitude }}"
-                         data-longitude="{{ property.longitude }}"
-                    ></div>
-
-                </div>
             </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Sidebar -->
-        <div class="col-md-4">
+  </div>
 
-            {{ include('property/partials/_contact_widget.html.twig') }}
-            {{ include('property/partials/_search_widget.html.twig') }}
 
-        </div>
 
-    </div>
 
-    {% if properties %}
-        {{ include('property/partials/_similar_properties.html.twig') }}
-    {% endif %}
+	{% endblock %}
 
-{% endblock %}
 
-{% block javascripts %}
-
-    {{ encore_entry_script_tags('js/ekko-lightbox') }}
-    <script>
-        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    </script>
-
-    {% if property.showMap == true and property.latitude != '' and property.longitude != '' %}
-
-        {% if site.ymaps_key != '' %}
-
-            <script src="https://api-maps.yandex.ru/2.1/?apikey={{ site.ymaps_key }}&lang={{ app.request.locale }}"></script>
-
-        {% else %}
-
-            <script src="https://api-maps.yandex.ru/2.1/?lang={{ app.request.locale }}"></script>
-
-        {% endif %}
-
-        {{ encore_entry_script_tags('js/map') }}
-
-    {% endif %}
-
-{% endblock %}

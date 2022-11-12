@@ -24,6 +24,7 @@ final class PropertyController extends BaseController
     {
         $searchParams = $transformer->transform($request);
         $properties = $repository->findByFilter($searchParams);
+        //dd($properties);
 
         return $this->render('admin/property/index.html.twig', [
             'site' => $this->site(),
@@ -37,13 +38,15 @@ final class PropertyController extends BaseController
      */
     public function new(Request $request, PropertyService $service): Response
     {
+
+        
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $service->create($property);
-
             return $this->redirectToRoute('admin_photo_edit', ['id' => $property->getId()]);
         }
 
@@ -54,6 +57,9 @@ final class PropertyController extends BaseController
         ]);
     }
 
+    
+     
+    
     /**
      * Displays a form to edit an existing Property entity.
      *

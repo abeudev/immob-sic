@@ -80,6 +80,18 @@
                 <source>locations</source>
                 <target>Locations</target>
             </trans-unit>
+            <trans-unit id="structures">
+                <source>structures</source>
+                <target>Structures</target>
+            </trans-unit>
+            <trans-unit id="agencies">
+                <source>agences</source>
+                <target>Agences</target>
+            </trans-unit>
+            <trans-unit id="contrat">
+                <source>Contrat</source>
+                <target>Contract</target>
+            </trans-unit>
             <trans-unit id="cities">
                 <source>cities</source>
                 <target>Cities</target>

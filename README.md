@@ -1,10 +1,9 @@
-![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Coderberg/ResidenceCMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Coderberg/ResidenceCMS/?branch=master) [![Build Status](https://travis-ci.com/Coderberg/ResidenceCMS.svg?branch=master)](https://travis-ci.com/Coderberg/ResidenceCMS) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Coderberg_ResidenceCMS&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Coderberg_ResidenceCMS) [![StyleCI](https://github.styleci.io/repos/148062622/shield?branch=master)](https://github.styleci.io/repos/148062622?branch=master)
 
-ResidenceCMS is a fast and lightweight Property Management System on top of [Symfony 5][1].
+Immob is a fast and lightweight Property Management System on top of [Symfony 5][1].
 
 The user interface is built with [Bootstrap 4][2].
 
-![GitHub](https://raw.githubusercontent.com/Coderberg/ResidenceCMS/master/docs/images/screenshot.png)
+
 
 ## Requirements
 
@@ -67,7 +66,7 @@ The user interface is built with [Bootstrap 4][2].
    ```
 
 ## Additional documentation
-- [How to run Residence CMS in Docker Containers][5]
+-
 
 [1]: https://symfony.com/
 [2]: https://getbootstrap.com
