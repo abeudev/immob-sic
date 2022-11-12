@@ -1,4 +1,3 @@
-)
 
 Immob is a fast and lightweight Property Management System on top of [Symfony 5][1].
 
